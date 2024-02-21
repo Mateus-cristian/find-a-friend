@@ -11,20 +11,20 @@ datasource db {
 }
 
 model Pet {
-  id               String       @id @default(uuid())
+  id               String   @id @default(uuid())
   name             String?
   type             String
   size             String
   age              Int
   energy_level     Int
-  dependency_level String
+  dependency_level Int
   environment      String
   city             String
   description      String
   latitude         Decimal?
   longitude        Decimal?
-  Organization     Organization @relation(fields: [organization_id], references: [id])
 
+  organization    Organization @relation(fields: [organization_id], references: [id])
   organization_id String
 
   @@map("pets")

@@ -6,7 +6,7 @@ CREATE TABLE "pets" (
     "size" TEXT NOT NULL,
     "age" INTEGER NOT NULL,
     "energy_level" INTEGER NOT NULL,
-    "dependency_level" TEXT NOT NULL,
+    "dependency_level" INTEGER NOT NULL,
     "environment" TEXT NOT NULL,
     "city" TEXT NOT NULL,
     "description" TEXT NOT NULL,
