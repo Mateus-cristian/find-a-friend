@@ -1,11 +1,22 @@
 import { Pet, Prisma } from '@prisma/client'
 
 import { randomUUID } from 'crypto'
-import { PetsRepository } from '../PetRepository'
+import { PetsRepository } from '../../PetRepository'
 import { IPetCharacteristics } from '@/@types/pets'
+import { PetNotFoundError } from '@/use-cases/error/pet-not-found'
 
 export class InMemoryPetsRepository implements PetsRepository {
   public items: Pet[] = []
+
+  async findPetById(petId: string): Promise<Pet> {
+    const pet = this.items.find((pet) => pet.id === petId)
+
+    if (!pet) {
+      throw new PetNotFoundError()
+    }
+
+    return pet
+  }
 
   async register(data: Prisma.PetUncheckedCreateInput): Promise<Pet> {
     const pet = {

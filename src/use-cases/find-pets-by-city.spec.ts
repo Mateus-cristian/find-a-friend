@@ -1,4 +1,4 @@
-import { InMemoryPetsRepository } from '@/repositories/in-memory/in-memory-pets.repository'
+import { InMemoryPetsRepository } from '@/repositories/prisma/in-memory/in-memory-pets.repository'
 import { describe, it, expect, beforeEach } from 'vitest'
 import { FindPetsByCityUseCase } from './find-pets-by-city'
 

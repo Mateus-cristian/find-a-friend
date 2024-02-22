@@ -1,18 +1,20 @@
 import { InMemoryPetsRepository } from '@/repositories/prisma/in-memory/in-memory-pets.repository'
 import { describe, it, expect, beforeEach } from 'vitest'
-import { RegisterPetUseCase } from './register-pet'
+import { FindPetsByIdUseCase } from './find-pet-by-id'
+import { randomUUID } from 'crypto'
 
 let petsRepository: InMemoryPetsRepository
-let sut: RegisterPetUseCase
+let sut: FindPetsByIdUseCase
 
-describe('Register pet use case', () => {
+describe('Find pet by id use case', () => {
   beforeEach(() => {
     petsRepository = new InMemoryPetsRepository()
-    sut = new RegisterPetUseCase(petsRepository)
+    sut = new FindPetsByIdUseCase(petsRepository)
   })
 
-  it('should be able to register', async () => {
-    const { pet } = await sut.execute({
+  it('should be able to find pets by id', async () => {
+    const pet = await petsRepository.register({
+      id: randomUUID(),
       name: 'zezinho',
       type: 'Dog',
       size: 'mini',
@@ -25,6 +27,9 @@ describe('Register pet use case', () => {
       organization_id: '12345498',
     })
 
-    expect(pet.id).toEqual(expect.any(String))
+    const response = await sut.execute({ petId: pet.id })
+
+    expect(response.pet.name).toEqual('zezinho')
+    expect(response.pet.age).toEqual(5)
   })
 })
