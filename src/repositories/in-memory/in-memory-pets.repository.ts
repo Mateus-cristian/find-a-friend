@@ -2,6 +2,7 @@ import { Pet, Prisma } from '@prisma/client'
 
 import { randomUUID } from 'crypto'
 import { PetsRepository } from '../PetRepository'
+import { IPetCharacteristics } from '@/@types/pets'
 
 export class InMemoryPetsRepository implements PetsRepository {
   public items: Pet[] = []
@@ -34,6 +35,23 @@ export class InMemoryPetsRepository implements PetsRepository {
     if (!pets) {
       return [] as Pet[]
     }
+
+    return pets
+  }
+
+  async findPetsByCharacteristics(params: IPetCharacteristics): Promise<Pet[]> {
+    const pets = this.items
+      .filter((pet) => (params.city ? pet.city === params.city : true))
+      .filter((pet) => (params.age ? pet.age === params.age : true))
+      .filter((pet) =>
+        params.energy_level ? pet.energy_level === params.energy_level : true,
+      )
+      .filter((pet) => (params.size ? pet.size === params.size : true))
+      .filter((pet) =>
+        params.dependency_level
+          ? pet.dependency_level === params.dependency_level
+          : true,
+      )
 
     return pets
   }
