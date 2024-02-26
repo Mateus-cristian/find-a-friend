@@ -38,7 +38,7 @@ model Organization {
   address       String
   latitude      Decimal?
   longitude     Decimal?
-  whatsapp      Int
+  whatsapp      BigInt
   password_hash String
 
   Pet Pet[]
