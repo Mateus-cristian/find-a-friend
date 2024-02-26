@@ -12,7 +12,7 @@ export class PrismaOrgRepository implements OrgRepository {
   }
 
   async findByEmail(email: string): Promise<Organization | null> {
-    const org = prisma.organization.findFirst({
+    const org = await prisma.organization.findFirst({
       where: {
         email,
       },
