@@ -1,6 +1,8 @@
 import { FastifyInstance } from 'fastify'
-import { findPetsByCity } from './findPetsByCity'
+import { findPetsByCityController } from './findPetsByCityController'
+import { findPetByIdController } from './findPetByIdController'
 
 export async function PetsRoutes(app: FastifyInstance) {
-  app.post('/pets/findByCity', findPetsByCity)
+  app.post('/pets/findByCity', findPetsByCityController)
+  app.post('/pets/findById', findPetByIdController)
 }
