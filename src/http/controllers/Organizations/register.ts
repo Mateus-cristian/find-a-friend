@@ -3,10 +3,7 @@ import { MakeRegisterOrgUseCase } from '@/use-cases/factories/make-register-org-
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
-export async function registerOrgController(
-  request: FastifyRequest,
-  reply: FastifyReply,
-) {
+export async function register(request: FastifyRequest, reply: FastifyReply) {
   const bodySchema = z.object({
     name: z.string(),
     email: z.string().email(),
