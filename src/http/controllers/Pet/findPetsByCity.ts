@@ -4,7 +4,7 @@ import { MakeFindPetsByCityUseCase } from '@/use-cases/factories/make-find-pets-
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
-export async function findPetsByCityController(
+export async function findPetsByCity(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {

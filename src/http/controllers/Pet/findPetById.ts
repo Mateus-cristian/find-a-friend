@@ -3,7 +3,7 @@ import { MakeFindPetByIdUseCase } from '@/use-cases/factories/make-find-pet-by-i
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
-export async function findPetByIdController(
+export async function findPetById(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
