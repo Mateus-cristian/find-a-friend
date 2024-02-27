@@ -1,11 +1,12 @@
 import { PetsRepository } from '@/repositories/PetRepository'
 import { Pet } from '@prisma/client'
+import { CityRequiredError } from './error/city-required'
 
-interface RegisterPetUseCaseRequest {
+interface FindPetsByCityUseCaseRequest {
   city: string
 }
 
-interface RegisterPetUseCaseResponse {
+interface FindPetsByCityUseCaseResponse {
   pets: Pet[]
 }
 
@@ -14,11 +15,15 @@ export class FindPetsByCityUseCase {
 
   async execute({
     city,
-  }: RegisterPetUseCaseRequest): Promise<RegisterPetUseCaseResponse> {
+  }: FindPetsByCityUseCaseRequest): Promise<FindPetsByCityUseCaseResponse> {
+    if (!city) {
+      throw new CityRequiredError()
+    }
+
     const pets = await this.petsRepository.findPetsByCity(city)
 
     return {
-      pets,
+      pets: pets ?? [],
     }
   }
 }
