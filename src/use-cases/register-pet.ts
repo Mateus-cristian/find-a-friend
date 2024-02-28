@@ -11,7 +11,7 @@ interface RegisterPetUseCaseRequest {
   environment: string
   city: string
   longitude?: number
-  latitude?: string
+  latitude?: number
   description: string
   organization_id: string
 }
